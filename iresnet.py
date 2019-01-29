@@ -1,5 +1,6 @@
 import tensorflow as tf
 import sys
+import numpy as np
 
 def tf_warp_img(im, disp):
     b = tf.shape(im)[0]
@@ -291,8 +292,11 @@ def test():
         iml = np.random.random((3, 256, 256, 3))
         imr = np.random.random((3, 256, 256, 3))
         disp = np.random.random((3, 256, 256, 1))
+        print('start')
         net = IResNet(mode='train', corr_type='tf')
+        print('iResNet initilised')
         sess = tf.Session()
+        print('tf session started')
         sess.run(tf.global_variables_initializer())
         start = time.time()
         pred, error = sess.run([net.pred, net.error], feed_dict={net.iml: iml,
